@@ -1,0 +1,80 @@
+CONSMODEL
+=========
+
+This is intended to be a flexible, but game-oriented model format
+based on CONSPACK.
+
+All symbols are in the CONSMODEL package unless otherwise noted.
+Format:
+
+  ("CMDL" {major: <int>} {minor: <int>} {sub: <int>})
+
+  <tmap: MODEL>
+    SCENES           #({root-node: <tmap: node>}...)
+    CAMERAS          #({camera: <tmap: camera>}...)
+    LIGHTS           #({light: <tmap: light>}...)
+    MESHES           #({mesh: <tmap: mesh>}...)
+    MATERIALS        #({material: <map>}...)
+
+Where:
+
+  <tmap: NODE>
+    CHILDREN         #(<tmap: node>...)
+    NAME             <string>
+    TRANSFORM        {matrix} | NIL
+                     ;; a NIL transform means no transformation, i.e.,
+                     ;; equivalent to the identity matrix
+
+  <tmap: CAMERA (NODE)>
+    ASPECT           <single-float>
+    CLIP-FAR         <single-float>
+    CLIP-NEAR        <single-float>
+    FOV              {radians: <single-float>}
+   [LOOK-AT          {point}]
+    NAME             <string>
+   [POSITION         {point}]
+   [UP               {point}]
+
+  <tmap: LIGHT (NODE)>
+    DIFFUSE                {color}
+    POSITION               {point}
+    SPECULAR               {color}
+
+  <tmap: LIGHT-POINT (LIGHT)>
+    ATTENUATION-CONSTANT   <single-float>
+    ATTENUATION-LINEAR     <single-float>
+    ATTENUATION-QUADRATIC  <single-float>
+
+  <tmap: LIGHT-DIRECTIONAL (LIGHT)>
+    DIRECTION              {direction}
+
+  <tmap: MESH (NODE)>
+    ID                     <int>
+    PRIMITIVE-TYPE         :point, :line, :triangle
+    VERTICES               #({point}...)
+    NORMALS                #({direction}...)
+    FACES                  #({vertex-index}...)
+    MATERIAL               #({material}...)
+
+  <tmap: MATERIAL>
+    NAME                   <string>
+
+  <tmap: MATERIAL-SIMPLE>
+    VALUES                 <map>
+      :DIFFUSE             {color}
+      :SPECULAR            {color}
+      :EMIT                {color}
+      :AMBIENT             {color}
+   [other <symbol> to value]
+
+  a matrix: <vector: single-float: 16>
+
+  a point: <vector: single-float: 3>: #(x y z)
+  a direction: <vector: single-float: 3>: #(x y z)
+
+  a color:
+    <vector: single-float: 3>: #(r g b)
+    <vector: single-float: 4>: #(r g b a)
+
+  an indexed-vertex: <vector: int: 3>; #(a b c)
+    ;; a, b, and c are indexes of VERTICES
