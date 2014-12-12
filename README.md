@@ -50,6 +50,8 @@ Of course, if you wish to *use* the files, you can load the model via the follow
 (consmodel:read-cmdl-file "FILE.CMDL") ;; => #<MODEL>
 ```
 
+(Note: "cubes.cmdl" is included in the `doc/` directory as an example.  It's slightly larger than the above listing due to the Blender exporter not producing optimal encodings yet.)
+
 ## Blender-direct export
 
 In addition to using classimp to convert files, you can directly export files from blender using the [`io_scene_consmodel`](https://github.com/rpav/io_scene_consmodel) addon.
