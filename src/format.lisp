@@ -13,7 +13,6 @@
                                       :ai-process-sort-by-p-type
                                       :ai-process-optimize-meshes))))
         (output))
-    (:say :br "Creating CMDL...")
     (unwind-protect
          (progn
            (when output-file
@@ -30,8 +29,7 @@
                 (conspack:encode (list "CMDL" 1 0 0))
                 buffer)
                (fast-io:fast-write-sequence packed buffer))))
-      (when output (close output))
-      (:say "DONE!"))))
+      (when output (close output)))))
 
 (defun read-cmdl-file (pathname)
   (conspack:with-named-index 'model-index-1

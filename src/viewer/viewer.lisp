@@ -145,7 +145,7 @@
       (vao-draw vao :count (mesh-flat-vertex-count mesh)))))
 
 (defun setup-light (lights n view-matrix dict)
-  (flet ((light (attr) (print (format nil "lights[~D].~A" n attr))))
+  (flet ((light (attr) (format nil "lights[~D].~A" n attr)))
     (let* ((light (car (aref lights n)))
            (position (kit.glm:transform-point (kit.glm:vec 0.0 0.0 0.0)
                                               (kit.glm:matrix*
