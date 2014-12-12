@@ -39,5 +39,5 @@
   (:inherit-from #:kit.glm #:look-at))
 
 (defpackage+ :consmodel.viewer
-  (:use #:cl #:kit.glm #:kit.gl.shader #:kit.gl.vao #:consmodel)
+  (:use #:cl #:kit.glm #:kit.gl #:kit.gl.shader #:kit.gl.vao #:consmodel)
   (:export #:view #:viewer))

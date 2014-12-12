@@ -104,6 +104,12 @@
     (when (eq :scancode-escape scancode)
       (kit.sdl2:close-window window))))
 
+(defmethod sdl2.kit:close-window ((v viewer))
+  (with-slots (vaos programs) v
+    (apply #'gl-delete (alexandria:hash-table-values vaos))
+    (gl-delete programs))
+  (call-next-method))
+
 (defun load-mesh (viewer mesh)
   (with-slots (stage programs) viewer
     (let* ((vao (make-instance 'vao :type 'simple-flat :primitive :triangles
