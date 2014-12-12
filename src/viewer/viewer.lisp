@@ -106,7 +106,9 @@
 
 (defmethod sdl2.kit:close-window ((v viewer))
   (with-slots (vaos programs) v
-    (apply #'gl-delete (alexandria:hash-table-values vaos))
+    (vao-unbind)
+    (use-program nil nil)
+    (gl-delete (alexandria:hash-table-values vaos))
     (gl-delete programs))
   (call-next-method))
 
